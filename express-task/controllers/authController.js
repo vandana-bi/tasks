@@ -1,12 +1,14 @@
-import User from "./Model.js";
+import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-production";
+const JWT_SECRET =
+  process.env.JWT_SECRET || "your-secret-key-change-in-production";
 const JWT_REFRESH_SECRET =
-  process.env.JWT_REFRESH_SECRET || "your-refresh-secret-key-change-in-production";
+  process.env.JWT_REFRESH_SECRET ||
+  "your-refresh-secret-key-change-in-production";
 const JWT_EXPIRY = "15m";
 const REFRESH_EXPIRY = "7d";
 
@@ -77,6 +79,7 @@ export const register = async (req, res) => {
       refreshToken,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       success: false,
       message: "Error registering user",
